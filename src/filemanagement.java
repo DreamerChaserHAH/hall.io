@@ -8,7 +8,7 @@ import java.io.BufferedWriter;
 
 // Class
 public class filemanagement {
-    
+
     // File creation
     public static void fileCreate(String[] fileNames, String pathFolder) {
         for (String fileName : fileNames) {
@@ -28,10 +28,11 @@ public class filemanagement {
             errorcode.printStackTrace();
         }
     }
-    
-    
+
+
     // File Reading
-    public static void fileRead(String fileName, String pathFolder) {
+    public static String fileRead(String fileName, String pathFolder) {
+        StringBuilder content = new StringBuilder();
         try {
             File file = new File(pathFolder + "/" + fileName);
             FileReader fileReader = new FileReader(file);
@@ -39,25 +40,27 @@ public class filemanagement {
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+                content.append(line).append("\n");
             }
 
             bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return content.toString();
     }
 
-    
+
     // File Writing
     public static void fileWrite(String fileName, String content, String pathFolder) {
         try {
             File file = new File(fileName);
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-    
+
             bufferedWriter.write(content);
-    
+
             bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,5 +68,3 @@ public class filemanagement {
     }
 
 }
-
-
