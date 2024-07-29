@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 public abstract class fileio {
-    public static void main(String filename) {
+    public static void createFile(String filename) {
         try {
             File file = new File(filename);
             if (file.createNewFile()) {
