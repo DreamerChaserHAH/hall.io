@@ -1,55 +1,54 @@
-//packages
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+// Packages
+import java.io.*;
+import java.util.*;
 
-public abstract class fileio {
-    public static void createFile(String filename) {
+
+public class fileio {
+    // Create Files
+    public static void fileCreate(String filepath) {
         try {
-            File file = new File(filename);
+            File file = new File(filepath);
             if (file.createNewFile()) {
-                System.out.println(filename + " created successfully.");
+                System.out.println("Done creating file" + file.getName());
             }
-            else {
-                System.out.println(filename + " already exists.");
+            else{
+                System.out.println("File is already existed");
             }
         } catch (Exception e) {
-            System.out.println("An error has occured while craeting " + filename);
             e.printStackTrace();
         }
     }
-    // Read from the bloody file yo
-    public String readFile(String fileName) {
-        StringBuilder content = new StringBuilder();
-        try {
-            File file = new File(fileName);
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+    // Read content from file
+    public List<String> readFile(String filePath) {
+        List<String> content = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                content.append(line).append("\n");
+            while ((line = br.readLine()) != null) {
+                content.add(line);
             }
-
-            bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return content.toString();
+        return content;
     }
-    public void writeFile(String filename, String content){
-        try {
-            File file = new File(filename);
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(content);
-            bufferedWriter.close();
-        } catch (Exception e) {
-            System.out.println("RIP Program lol");
+    // Write Contents to file
+    public void writeFile(String filePath, String content) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Append content to file
+    public void appendToFile(String filePath, String content) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
+            bw.write(content);
+            bw.newLine();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+
