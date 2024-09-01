@@ -4,68 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hallio</groupId>
-    <artifactId>app</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>data-management-system</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.hallio</groupId>
-            <artifactId>data-management-system</artifactId>
-            <version>1.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/data-management-system-1.1-SNAPSHOT.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.hallio</groupId>
-            <artifactId>user-management-system</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/user-management-system-1.0.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.hallio</groupId>
-            <artifactId>sales-management-system</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/sales-management-system-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.hallio</groupId>
-            <artifactId>ticket-management-system</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/ticket-management-system-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.hallio</groupId>
-            <artifactId>booking-management-system</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/booking-management-system-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.hallio</groupId>
-            <artifactId>hall-management-system</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/hall-management-system-1.0-SNAPSHOT.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>11</version>
-        </dependency>
-    </dependencies>
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
