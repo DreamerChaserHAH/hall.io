@@ -40,14 +40,14 @@ public class startupmanager {
         }
     }       
 
-    // Create superuser in text file
-    // private static void createSuperUser() {
-    //     try {
-    //         FileManager.writeFile("users.txt", null);
-    //     } catch (Exception e) {
-    //         // TODO: handle exception
-    //     }
-    // }
+    // create superuser in text file
+    private static void createSuperUser() {
+        try {
+            FileManager.writeFile("users.txt", null);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
 
 }
 

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.lucid.admin.authentication; // Import the authentication class
+
 
 public class loginGUI {
 
