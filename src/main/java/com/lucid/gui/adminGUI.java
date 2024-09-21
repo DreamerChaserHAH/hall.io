@@ -1,5 +1,5 @@
 package com.lucid.gui;
 
-public class scheduling {
+public class adminGUI {
     
 }

@@ -44,8 +44,14 @@ public class loginGUI {
                     frame.dispose();
                     String roleuser = com.lucid.admin.authentication.getRole(username); // Get role of user
                     if (roleuser != null) {
-                        // com.lucid.lucidhallio.authentication.callgui(roleuser);
-                        JOptionPane.showMessageDialog(frame, "Login successful. Role: " + roleuser);
+                        if (roleuser.equals("superuser")) {
+                            superadmin superadmin = new superadmin();
+                            superadmin.setVisible(true);
+                        } else if (roleuser.equals("admin")) {
+                            System.out.println("Admin");
+                        } else if (roleuser.equals("user")) {
+                            System.out.println("User");
+                        }
                     }
                     else {
                         JOptionPane.showMessageDialog(frame, "Role not found on user.");

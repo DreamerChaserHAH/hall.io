@@ -1,6 +1,4 @@
 package com.lucid.admin;
-// Doing fresh startup
-
 import com.lucid.fileio.DatabaseManager;
 import com.lucid.fileio.FileManager;
 public class startupmanager {
@@ -24,7 +22,7 @@ public class startupmanager {
                 }
                 // Create a start.flag
                 FileManager.createFile("start.flag");
-                administrator.superuserCreate();
+                usermgment.superuserCreate(); // Create SuperUser
                 System.out.println("Fresh startup completed successfully.");
                 System.exit(0);
             }
@@ -40,14 +38,6 @@ public class startupmanager {
         }
     }       
 
-    // create superuser in text file
-    private static void createSuperUser() {
-        try {
-            FileManager.writeFile("users.txt", null);
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-    }
 
 }
 

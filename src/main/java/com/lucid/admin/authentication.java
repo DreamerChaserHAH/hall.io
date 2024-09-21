@@ -6,7 +6,7 @@ import java.io.IOException;
 public class authentication {
        public static boolean authenticate(String username, String password) {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("databases/users.txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] parts = line.split(",");
@@ -24,13 +24,13 @@ public class authentication {
     }
 
     public static String getRole(String username) {
-        String fileName = "users.txt";
+        String fileName = "databases/users.txt";
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
                 if (parts.length >= 2 && parts[0].equals(username)) {
-                    return parts[1];
+                    return parts[2];
                 }
             }
         } catch (IOException e) {
