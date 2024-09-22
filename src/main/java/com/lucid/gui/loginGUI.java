@@ -48,7 +48,8 @@ public class loginGUI {
                             superadmin superadmin = new superadmin();
                             superadmin.setVisible(true);
                         } else if (roleuser.equals("admin")) {
-                            System.out.println("Admin");
+                            administrator admin = new administrator();
+                            admin.setVisible(true);
                         } else if (roleuser.equals("user")) {
                             System.out.println("User");
                         }

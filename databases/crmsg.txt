@@ -1,0 +1,3 @@
+Auditorium,Hall reserved for a July, 2024 Conference on Sustainable Energy.
+Banquet Hall,Air conditioning check and lighting repairs.
+Meeting Room,Available for meetings in September.

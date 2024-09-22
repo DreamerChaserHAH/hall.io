@@ -1,14 +1,18 @@
-package com.lucid.Scheduler;
+package com.lucid.scheduler;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Hall {
     private int id; // Unique identifier for the hall
-    private String hallType; // Type of the hall (e.g., Auditorium, Banquet)
+    private String hallType; // Type of the hall
     private String hallLocation; // Location of the hall
     private Date maintenanceStartTime; // Start time of maintenance
-    private Date maintenanceEndTime; // End time of maintenance
+// Start time of maintenance
+    private Date maintenanceEndTime;
+    // Added field for hourly rate
+    // End time of maintenance
 
     // Constructor to create a new hall
     public Hall(int id, String hallType, String hallLocation, Date maintenanceStartTime, Date maintenanceEndTime) {
@@ -30,11 +34,11 @@ public class Hall {
 
     public LinkedList<String> getAttributes() {
         return new LinkedList<>(List.of(
-            String.valueOf(this.id),
-            this.hallType,
-            this.hallLocation,
-            String.valueOf(this.maintenanceStartTime.getTime()),
-            String.valueOf(this.maintenanceEndTime.getTime())
+                String.valueOf(this.id),
+                this.hallType,
+                this.hallLocation,
+                String.valueOf(this.maintenanceStartTime.getTime()),
+                String.valueOf(this.maintenanceEndTime.getTime())
         ));
     }
 
@@ -48,11 +52,6 @@ public class Hall {
         this.hallLocation = attributes.get(2);
         this.maintenanceStartTime = new Date(Long.parseLong(attributes.get(3)));
         this.maintenanceEndTime = new Date(Long.parseLong(attributes.get(4)));
-    }
-
-    // Method to create a hall
-    public static Hall createHall(int id, String hallType, String hallLocation, Date maintenanceStartTime, Date maintenanceEndTime) {
-        return new Hall(id, hallType, hallLocation, maintenanceStartTime, maintenanceEndTime);
     }
 
     // Getters and Setters
@@ -91,7 +90,22 @@ public class Hall {
 
     // Method to display hall information
     public String displayInfo() {
-        return "Hall ID: " + id + ", Type: " + hallType + ", Location: " + hallLocation +
-               ", Maintenance Start: " + maintenanceStartTime + ", Maintenance End: " + maintenanceEndTime;
+        return "Hall ID: " + id + ", Type: " + hallType + ", Location: " + hallLocation;
+    }
+
+    // Add methods to handle availability and maintenance periods
+    public void addAvailabilityPeriod(LocalDateTime start, LocalDateTime end, String remarks) {
+        // Logic to add availability period (store in a list or similar)
+    }
+
+    public void addMaintenancePeriod(LocalDateTime start, LocalDateTime end, String remarks) {
+        // Logic to add maintenance period (store in a list or similar)
+    }
+
+    public void setHourlyRate(double rate) {
+    }
+
+    public void setTotalSeats(int seats) {
+        // Implement logic to set total seats
     }
 }

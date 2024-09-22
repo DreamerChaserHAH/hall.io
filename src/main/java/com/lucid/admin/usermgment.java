@@ -1,7 +1,5 @@
 package com.lucid.admin;
-
 import com.lucid.fileio.FileManager;
-
 public class usermgment {
 
     public class staff {
@@ -24,11 +22,11 @@ public class usermgment {
 
     public static void userCreate(String userLogiName, String userPassword, String userRole, String userFirstName,String userLastName ,String userPhone, String userEmail) {
         String currentDate = java.time.LocalDate.now().toString();
-        String details = userLogiName + "," + userPassword + "," + userRole + "," + userFirstName + "," +userLastName+ "," + userPhone + "," + userEmail + "," + currentDate + "," + currentDate;
+        String details = userLogiName + "," + userPassword + "," + userRole + "," + userFirstName + "," +userLastName+ "," + userPhone + "," + userEmail + "," + currentDate + "," + currentDate + "0";
         FileManager.appendFile("users.txt", details);
     }
 
-    
+   
 
 
 }

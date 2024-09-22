@@ -1,0 +1,3 @@
+admin,Administrator,admin@example.com,1234567890
+scheduler1,Scheduler,scheduler1@example.com,0987654321
+manager1,Manager,manager1@example.com,1122334455

@@ -99,11 +99,11 @@ public class superadmin extends javax.swing.JFrame {
     }                                           
 
     private void adminManageActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+        
     }                                           
 
     private void superInfoEditActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+        
     }                                             
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {                                        

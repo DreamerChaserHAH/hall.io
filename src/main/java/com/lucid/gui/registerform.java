@@ -1,4 +1,5 @@
 package com.lucid.gui;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +8,10 @@ import java.awt.event.FocusListener;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import com.lucid.admin.usermgment;
+import com.lucid.admin.usermgment; 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import com.formdev.flatlaf.FlatLightLaf;
 
 /**
  *
@@ -16,11 +20,17 @@ import com.lucid.admin.usermgment;
 public class registerform extends javax.swing.JFrame {
 
     public registerform(String userRole) {
+        // Set FlatLaf Cupertino Light theme
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }
+
         initComponents(userRole);
         addPlaceholders();
     }
 
-    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents(String userRole) {
 
@@ -185,8 +195,6 @@ public class registerform extends javax.swing.JFrame {
         });
     }
 
-
-
     private void userSignupbtnActionPerformed(java.awt.event.ActionEvent evt) {
         // Collect input data
         String userLogiName = userLoginName.getText();
@@ -198,38 +206,38 @@ public class registerform extends javax.swing.JFrame {
         String useremail = userEmail.getText();
 
         // Validate email and password before proceeding
-    if (!validateEmail(useremail)) {
-        this.userEmail.setBackground(Color.red); // Highlight email field in red if invalid
-        return; // Exit if validation fails
-    } else {
-        this.userEmail.setBackground(Color.white);
+        if (!validateEmail(useremail)) {
+            this.userEmail.setBackground(Color.red); // Highlight email field in red if invalid
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid email address.");
+            return; // Exit if validation fails
+        } else {
+            this.userEmail.setBackground(Color.white);
+        }
+
+        if (!validatePassword(userPassword)) {
+            userpassword.setBackground(Color.red); // Highlight password field in red if invalid
+            javax.swing.JOptionPane.showMessageDialog(this, "Password must be at least 8 characters long and contain at least one digit, one special character, and one uppercase letter.");
+            return; // Exit if validation fails
+        } else {
+            userpassword.setBackground(Color.white);
+        }
+
+        // Username must be > 8 characters
+        if (userLogiName.length() < 8) {
+            userLoginName.setBackground(Color.red); // Highlight username field in red if invalid
+            javax.swing.JOptionPane.showMessageDialog(this, "Username must be at least 8 characters long.");
+            return; // Exit if validation fails
+        } else {
+            userLoginName.setBackground(Color.white);
+
+            // Call the userCreate method
+            usermgment.userCreate(userLogiName, userPassword, userRole, userfirstname, userlastname, userPhone, useremail);
+
+            // Pop-up message
+            javax.swing.JOptionPane.showMessageDialog(this, "User created successfully.");
+            this.dispose();
+        }
     }
-
-    if (!validatePassword(userPassword)) {
-        userpassword.setBackground(Color.red); // Highlight password field in red if invalid
-        return; // Exit if validation fails
-    } else {
-        userpassword.setBackground(Color.white);
-    }
-
-    // username must be > 8 characters
-    if (userLogiName.length() < 8) {
-        userLoginName.setBackground(Color.red); // Highlight username field in red if invalid
-        return; // Exit if validation fails
-    } else {
-        userLoginName.setBackground(Color.white);
-
-        // Call the userCreate method
-        usermgment.userCreate(userLogiName, userPassword, userRole, userfirstname,userlastname, userPhone, useremail);
-
-        // PopUp message
-        javax.swing.JOptionPane.showMessageDialog(this, "User created successfully.");
-        this.dispose();
-        System.exit(0);
-    }
-}
-
-    // validate username
 
     private boolean validateEmail(String email) {
         String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
@@ -241,17 +249,6 @@ public class registerform extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception ex) {
-            java.util.logging.Logger.getLogger(registerform.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new registerform("superuser").setVisible(true); // Pass the user role here
