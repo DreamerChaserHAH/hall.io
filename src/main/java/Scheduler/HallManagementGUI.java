@@ -1,12 +1,12 @@
 package Scheduler;
 
+import com.lucid.Scheduler.Dashboard;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +15,7 @@ import java.util.List;
 
 public class HallManagementGUI extends JFrame {
     private HallManager hallManager;
+    private Dashboard dashboard; // Reference to the Dashboard
     private JTextField idField; // Hall ID field
     private JTextField nameField;
     private JTextField rateField;
@@ -32,9 +33,13 @@ public class HallManagementGUI extends JFrame {
     private JTable scheduleTable;
     private DefaultTableModel scheduleTableModel;
 
-    public HallManagementGUI(HallManager hallManager) {
+    public HallManagementGUI(HallManager hallManager, Dashboard dashboard) {
         this.hallManager = hallManager;
+        this.dashboard = dashboard; // Store the dashboard reference
         createAndShowGUI();
+    }
+
+    public HallManagementGUI(HallManager hallManager) {
     }
 
     private void createAndShowGUI() {
@@ -54,6 +59,20 @@ public class HallManagementGUI extends JFrame {
         // Create the Schedule Management panel
         JPanel schedulePanel = createScheduleManagementPanel();
         tabbedPane.addTab("Manage Schedule", schedulePanel);
+
+        // Add a back button to return to the dashboard
+        JButton backButton = new JButton("Back to Dashboard");
+        backButton.addActionListener(e -> goBackToDashboard());
+        backButton.setBackground(new Color(75, 0, 130)); // Darker purple
+        backButton.setForeground(Color.WHITE);
+        backButton.setFocusPainted(false);
+        backButton.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        backButton.setPreferredSize(new Dimension(150, 30)); // Set button size
+
+        // Position the back button in the corner
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(backButton);
+        add(buttonPanel, BorderLayout.NORTH);
 
         add(tabbedPane, BorderLayout.CENTER);
         setVisible(true);
@@ -244,7 +263,7 @@ public class HallManagementGUI extends JFrame {
     }
 
     private void saveSchedulesToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("databases/crmsg.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter ("databases/crmsg.txt"))) {
             for (int i = 0; i < scheduleTableModel.getRowCount(); i++) {
                 String title = (String) scheduleTableModel.getValueAt(i, 0);
                 int hallId = (int) scheduleTableModel.getValueAt(i, 1);
@@ -348,9 +367,15 @@ public class HallManagementGUI extends JFrame {
         endTimeSpinner.setValue(new java.util.Date());
     }
 
+    private void goBackToDashboard() {
+        dashboard.setVisible(true); // Show the dashboard
+        dispose(); // Close the hall management window
+    }
+
     public static void main(String[] args) {
         HallManager hallManager = new HallManager();
-        new HallManagementGUI(hallManager);
+        Dashboard dashboard = new Dashboard(hallManager); // Create Dashboard instance
+        new HallManagementGUI(hallManager, dashboard); // Pass dashboard to HallManagementGUI
     }
 
     private JPanel createSectionPanel(String title) {
@@ -408,5 +433,29 @@ public class HallManagementGUI extends JFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please enter a valid Hall ID.");
         }
+    }
+
+    private void showAvailableHalls() {
+        StringBuilder availableHalls = new StringBuilder("<html><body style='font-family: Arial;'>");
+        availableHalls.append("<h2>Available Halls:</h2>");
+        try (BufferedReader br = new BufferedReader(new FileReader("databases/crm.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(","); // Assuming CSV format: ID, Name, Date, Time
+                if (parts.length == 4) {
+                    availableHalls.append("<div style='color: blue;'>")
+                            .append("ID: ").append(parts[0].trim())
+                            .append(", Name: ").append(parts[1].trim())
+                            .append(", Date: ").append(parts[2].trim())
+                            .append(", Time: ").append(parts[3].trim())
+                            .append("</div>");
+                }
+            }
+        } catch (IOException e) {
+            availableHalls.append("<div style='color: red;'>Error reading file: ").append(e.getMessage()).append("</div>");
+        }
+        availableHalls.append("</body></html>");
+
+        JOptionPane.showMessageDialog(this, availableHalls.toString(), "Available Halls", JOptionPane.INFORMATION_MESSAGE);
     }
 }

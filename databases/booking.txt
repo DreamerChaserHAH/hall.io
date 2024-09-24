@@ -1,0 +1,4 @@
+ID: 1, Name: Meeting Hall A, Date: 2024-09-02, Time: 14:00
+3ConferenceRoom C2024-09-0412:00
+6AuditoriumHall2024-09-0412:00
+ID: 2, Name: Conference, Date: 2024-09-03, Time: 10:00
