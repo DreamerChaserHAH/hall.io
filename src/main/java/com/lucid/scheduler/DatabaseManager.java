@@ -1,4 +1,6 @@
-package com.lucid.scheduler;
+package com.lucid.Scheduler;
+
+import Scheduler.Hall;
 
 import java.io.File;
 //import java.util.List;

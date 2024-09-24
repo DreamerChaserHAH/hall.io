@@ -1,6 +1,6 @@
-package com.lucid.scheduler; // Corrected package name
+package com.lucid.Scheduler; // Corrected package name
 
-public class Scheduler {
+public class scheduler {
     public static void main(String[] args) {
         // Initialize HallManager
         // Add logic to interact with hallManager

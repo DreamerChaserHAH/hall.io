@@ -1,7 +1,7 @@
-package com.lucid.scheduler;
+package com.lucid.Scheduler;
 
-//import java.util.Date;
-//import java.util.Scanner;
+import java.util.Date;
+import java.util.Scanner;
 //import com.hallio.dms.DatabaseManager; // Import DatabaseManager
 
 public class Main {

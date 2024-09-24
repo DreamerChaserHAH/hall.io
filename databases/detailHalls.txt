@@ -1,3 +1,2 @@
-Auditorium,1000,300.00,2024-07-01,2024-07-10,Hall reserved for a July, 2024 Conference on Sustainable Energy.
-Banquet Hall,300,100.00,2024-08-15,2024-08-20,Hall maintenance: Air conditioning check.
-Meeting Room,30,50.00,2024-09-01,2024-09-05,Meeting Room available.
+1,Wedding Hall,1000.0,200
+2,Meeting Hall,500.0,16
