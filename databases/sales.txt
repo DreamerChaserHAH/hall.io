@@ -1,3 +1,0 @@
-Auditorium,John Doe,900.00,2024-07-01
-Banquet Hall,Jane Smith,500.00,2024-08-20
-Meeting Room,ACME Corp,150.00,2024-09-05
