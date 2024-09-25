@@ -1,4 +1,4 @@
-package com.lucid.admin;
+package com.hallio.admin;
 
 public class Lucidhallio {
     public static void main(String[] args) {
@@ -6,7 +6,7 @@ public class Lucidhallio {
         if (startupmanager.checkFreshStart()) {
             // Start the application
             System.out.println("Starting the application...");
-            com.lucid.gui.loginGUI.main(args);
+            com.hallio.gui.loginGUI.main(args);
         }
         else {
             startupmanager.performFreshStart(args);            

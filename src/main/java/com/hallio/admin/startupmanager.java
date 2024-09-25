@@ -1,11 +1,11 @@
-package com.lucid.admin;
-import com.lucid.fileio.DatabaseManager;
-import com.lucid.fileio.FileManager;
+package com.hallio.admin;
+import com.hallio.fileio.DatabaseManager;
+import com.hallio.fileio.FileManager;
 public class startupmanager {
     
     // Check for flag file
     public static boolean checkFreshStart() {
-        return com.lucid.fileio.FileManager.isFileExist("start.flag");
+        return com.hallio.fileio.FileManager.isFileExist("start.flag");
     }
 
     // Perform Fresh Start
