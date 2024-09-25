@@ -1,6 +1,6 @@
 package com.hallio.admin;
 
-public class User {
+public class User implements IObject {
     private String username;
     private String password;
     private String role;
@@ -33,5 +33,15 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public void save() {
+        // Implement save logic
+    }
+
+    @Override
+    public void delete() {
+        // Implement delete logic
     }
 }
