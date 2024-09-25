@@ -1,18 +1,23 @@
 package com.hallio.admin;
+import java.util.Date;
 
 public class User {
     private String username;
     private String password;
     private String role;
-    private String email; // New attribute
-    private boolean isActive; // New attribute
+    private String email;
+    private boolean isActive;
+    private Date lastLogin;
+    private Date registeredDate;
 
-    public User(String username, String password, String role, String email, boolean isActive) {
+    public User(String username, String password, String role, String email, boolean isActive, Date lastLogin, Date registeredDate) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.email = email;
         this.isActive = isActive;
+        this.lastLogin = lastLogin;
+        this.registeredDate = registeredDate;
     }
 
     public String getUsername() {
@@ -53,5 +58,21 @@ public class User {
 
     public void setActive(boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public Date getRegisteredDate() {
+        return registeredDate;
+    }
+
+    public void setRegisteredDate(Date registeredDate) {
+        this.registeredDate = registeredDate;
     }
 }
