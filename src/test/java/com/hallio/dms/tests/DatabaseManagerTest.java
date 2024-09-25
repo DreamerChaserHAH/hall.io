@@ -83,4 +83,9 @@ public class DatabaseManagerTest {
         DatabaseManager.deleteRecord("sample", 1);
         assertEquals(0, FileManager.readFile("sample.txt").size());
     }
+
+    @Test
+    public void testGetNext() {
+        assertEquals(1, DatabaseManager.getNext("sample.txt"));
+    }
 }
