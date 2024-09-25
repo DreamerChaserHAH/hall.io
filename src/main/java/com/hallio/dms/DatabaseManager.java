@@ -61,8 +61,8 @@ public class DatabaseManager {
         return -1;
     }
 
-    public static int getNext(String databasePath){
-        List<String> content = FileManager.readFile(databasePath);
+    public static int getNext(String databaseName){
+        List<String> content = FileManager.readFile(getFilePath(databaseName));
         if(content.size() == 0){
             return 1;
         }

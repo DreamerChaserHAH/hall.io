@@ -45,6 +45,7 @@ public abstract class IObject implements ILoadableObject, IDeleteableObject, ISa
 
     }
 
+
     protected abstract LinkedList<String> getAttributes();
     protected abstract String getFilePath();
     protected abstract void loadFromString(List<String> attributes);
