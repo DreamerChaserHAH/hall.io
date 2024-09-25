@@ -4,25 +4,27 @@ import com.hallio.dms.DatabaseManager;
 
 public class BookingManager
 {
+    private static final String databaseName = "booking";
     public static void createBooking(int hallId, int saleId)
     {
-        Booking booking = new Booking(1, hallId, saleId);
-        booking.save();
+        int nextId = DatabaseManager.getNext(databaseName);
+        Booking booking = new Booking(nextId, hallId, saleId);
+        DatabaseManager.createRecord(databaseName, booking);
     }
 
-    public static void readBooking(int bookingId) throws Exception {
+    public static Booking readBooking(int bookingId) throws Exception {
         Booking booking = new Booking(bookingId, 0, 0);
-        DatabaseManager.readRecord(booking.getFilePath(), bookingId, booking);
+        DatabaseManager.readRecord(databaseName, bookingId, booking);
+        return booking;
     }
 
     public static void deleteBooking(int bookingId) throws Exception {
         Booking booking = new Booking(bookingId, 0, 0);
-        DatabaseManager.deleteRecord(booking.getFilePath(), bookingId);
+        DatabaseManager.deleteRecord(databaseName, bookingId);
     }
 
     public static void updateBooking(int bookingId, int hallId, int saleId) throws Exception {
         Booking booking = new Booking(bookingId, hallId, saleId);
-        DatabaseManager.updateRecord(booking.getFilePath(), bookingId, booking);
+        DatabaseManager.updateRecord(databaseName, bookingId, booking);
     }
-
 }
