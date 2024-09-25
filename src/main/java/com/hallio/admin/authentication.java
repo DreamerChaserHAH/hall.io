@@ -1,42 +1,18 @@
 package com.hallio.admin;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class authentication {
-       public static boolean authenticate(String username, String password) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("databases/users.txt"));
-            String line = reader.readLine();
-            while (line != null) {
-                String[] parts = line.split(",");
-                if (parts[0].equals(username) && parts[1].equals(password)) {
-                    reader.close();
-                    return true;
-                }
-                line = reader.readLine();
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    return false;
+    private AuthenticationService authService = new AuthenticationService();
+
+    public boolean authenticate(String username, String password) {
+        return authService.authenticate(username, password);
     }
 
-    public static String getRole(String username) {
-        String fileName = "databases/users.txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length >= 2 && parts[0].equals(username)) {
-                    return parts[2];
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "Role not found"; 
+    public String getRole(String username) {
+        return authService.getRole(username);
     }
 
+    // New method to reset password
+    public boolean resetPassword(String username, String newPassword) {
+        return authService.resetPassword(username, newPassword);
+    }
 }

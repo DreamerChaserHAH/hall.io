@@ -15,13 +15,19 @@ public class UserManagementService {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length >= 3) {
-                    users.add(new User(parts[0], parts[1], parts[2]));
+                if (parts.length >= 5) {
+                    users.add(new User(parts[0], parts[1], parts[2], parts[3], Boolean.parseBoolean(parts[4])));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return users;
+    }
+
+    // New method to deactivate a user
+    public boolean deactivateUser(String username) {
+        // Implementation to deactivate user
+        return true;
     }
 }
