@@ -1,5 +1,6 @@
 package com.hallio.dms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 ///<summary>
@@ -106,5 +107,10 @@ public class DatabaseManager {
     /// <summary>
     public static void deleteDatabase(String databaseName){
         FileManager.deleteFile(getFilePath(databaseName));
+    }
+
+    public List<String> readFile(String databaseName) {
+        // Implement the logic to read from the file
+        return new ArrayList<>();
     }
 }
