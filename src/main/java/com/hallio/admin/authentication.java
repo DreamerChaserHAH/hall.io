@@ -2,7 +2,7 @@ package com.hallio.admin;
 
 import java.util.List;
 
-public class authentication implements IObject {
+public class authentication {
     private authenticationservices authServices;
 
     public authentication(authenticationservices authServices) {
@@ -29,13 +29,11 @@ public class authentication implements IObject {
         return "Role not found";
     }
 
-    @Override
-    public void save() {
-        // Implement save logic
+    public boolean addUser(User user) {
+        return authServices.addUser(user);
     }
 
-    @Override
-    public void delete() {
-        // Implement delete logic
+    public boolean removeUser(int id) {
+        return authServices.removeUser(id);
     }
 }

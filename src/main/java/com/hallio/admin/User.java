@@ -1,6 +1,10 @@
 package com.hallio.admin;
 
-public class User implements IObject {
+import com.hallio.dms.IObject;
+import java.util.LinkedList;
+import java.util.List;
+
+public class User extends IObject {
     private String username;
     private String password;
     private String role;
@@ -36,12 +40,24 @@ public class User implements IObject {
     }
 
     @Override
-    public void save() {
-        // Implement save logic
+    protected LinkedList<String> getAttributes() {
+        LinkedList<String> attributes = new LinkedList<>();
+        attributes.add(username);
+        attributes.add(password);
+        attributes.add(role);
+        return attributes;
     }
 
     @Override
-    public void delete() {
-        // Implement delete logic
+    protected String getFilePath() {
+        return "databases/users.txt";
+    }
+
+    @Override
+    protected void loadFromString(List<String> attributes) {
+        this.id = Integer.parseInt(attributes.get(0));
+        this.username = attributes.get(1);
+        this.password = attributes.get(2);
+        this.role = attributes.get(3);
     }
 }

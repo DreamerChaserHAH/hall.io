@@ -4,7 +4,7 @@ import com.hallio.dms.DatabaseManager;
 import java.util.List;
 import java.util.ArrayList;
 
-public class authenticationservices implements IObject {
+public class authenticationservices {
     private DatabaseManager dbManager;
     private static final String DATABASE_NAME = "users";
 
@@ -17,20 +17,12 @@ public class authenticationservices implements IObject {
         List<String> records = dbManager.readFile(DATABASE_NAME);
         for (String record : records) {
             String[] parts = record.split(",");
-            if (parts.length >= 3) {
-                users.add(new User(parts[0], parts[1], parts[2]));
+            if (parts.length >= 4) {
+                User user = new User(parts[1], parts[2], parts[3]);
+                user.id = Integer.parseInt(parts[0]);
+                users.add(user);
             }
         }
         return users;
-    }
-
-    @Override
-    public void save() {
-        // Implement save logic
-    }
-
-    @Override
-    public void delete() {
-        // Implement delete logic
     }
 }
