@@ -26,7 +26,7 @@
         <dependency>
             <groupId>com.github.DreamerChaserHAH</groupId>
             <artifactId>hall.io</artifactId>
-            <version>data-management-system-SNAPSHOT</version>
+            <version>b35177740799edc10b81695244bd3b45f59f0aea</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
