@@ -1,6 +1,6 @@
 package com.hallio;
-import com.hallio.fileio.DatabaseManager;
-import com.hallio.fileio.FileManager;
+import com.hallio.dms.DatabaseManager;
+import com.hallio.dms.FileManager;
 public class startupmanager {
 
     // Check for flag file

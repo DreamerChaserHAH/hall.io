@@ -1,4 +1,4 @@
-package com.hallio.gui;
+package com.hallio;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -7,7 +7,7 @@ public class Main {
         if (startupmanager.checkFreshStart()) {
             // Start the application
             System.out.println("Starting the application...");
-            com.hallio.gui.loginGUI.main(args);
+            com.hallio.gui.windows.loginGUI.main(args);
         }
         else {
             startupmanager.performFreshStart(args);
