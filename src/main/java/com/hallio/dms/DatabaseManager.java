@@ -61,6 +61,15 @@ public class DatabaseManager {
         return -1;
     }
 
+    public static int getNext(String databasePath){
+        List<String> content = FileManager.readFile(databasePath);
+        if(content.size() == 0){
+            return 1;
+        }
+        String[] record = content.get(content.size() - 1).split(",");
+        return Integer.parseInt(record[0]) + 1;
+    }
+
     /// <summary>
     /// Update a record inside the "database" using the id in the given object
     /// </summary>
