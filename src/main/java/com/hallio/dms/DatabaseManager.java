@@ -48,6 +48,27 @@ public class DatabaseManager {
         object.LoadFromString(relevantContent);
     }
 
+    ///<summary>
+    ///get amount of records
+    ///</summary>
+    public static int getAmountOfRecords(String databaseName){
+        List<String> content = FileManager.readFile(getFilePath(databaseName));
+        return content.size();
+    }
+
+    ///<summary>
+    ///read all records
+    ///</summary>
+    public static void readAllRecords(String databaseName, IObject[] objects){
+        List<String> content = FileManager.readFile(getFilePath(databaseName));
+        for(String record : content){
+            System.out.println(record);
+        }
+        for(int i = 0; i < content.size(); i++) {
+            objects[i].LoadFromString(content.get(i));
+        }
+    }
+
     /// <summary>
     /// find the line number of the record with the given id
     /// </summary>

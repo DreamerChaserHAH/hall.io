@@ -88,4 +88,18 @@ public class DatabaseManagerTest {
     public void testGetNext() {
         assertEquals(1, DatabaseManager.getNext("sample.txt"));
     }
+
+    @Test
+    public void testReadAllRecords() {
+        SampleObject sampleObject = new SampleObject(1, "John", 20);
+        DatabaseManager.createRecord("sample", sampleObject);
+        SampleObject sampleObject2 = new SampleObject(2, "Jane", 21);
+        DatabaseManager.createRecord("sample", sampleObject2);
+        SampleObject[] sampleObjects = new SampleObject[DatabaseManager.getAmountOfRecords("sample")];
+        for (int i = 0; i < sampleObjects.length; i++) {
+            sampleObjects[i] = new SampleObject();
+        }
+        DatabaseManager.readAllRecords("sample", sampleObjects);
+        assertEquals(2, sampleObjects.length);
+    }
 }
