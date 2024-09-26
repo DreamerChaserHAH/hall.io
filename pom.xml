@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.github.DreamerChaserHAH</groupId>
             <artifactId>hall.io</artifactId>
-            <version>b35177740799edc10b81695244bd3b45f59f0aea</version>
+            <version>user-management-system-SNAPSHOT</version>
         </dependency>
         <!-- JUnit dependency for testing -->
         <dependency>
@@ -38,8 +38,8 @@
             <artifactId>flatlaf</artifactId>
             <version>3.1</version>
         </dependency>
-
     </dependencies>
+
     <build>
         <plugins>
             <!-- Compiler plugin -->
