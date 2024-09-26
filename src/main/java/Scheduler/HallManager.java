@@ -1,54 +1,43 @@
 package Scheduler;
 
+import com.lucid.fileio.FileManager;
+import com.lucid.fileio.IObject;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class HallManager {
+public class HallManager extends IObject {
     private List<Hall> halls;
 
     public HallManager() {
         halls = new ArrayList<>();
-        loadHalls("databases/detailHalls.txt");
+        loadHalls();
     }
 
     public void addHall(Hall hall) {
         halls.add(hall);
-        saveHalls("databases/detailHalls.txt");
+        hall.save(); // Save the hall using the IObject method
     }
 
     public void updateHall(Hall hall) {
         // Logic to update hall in the list
-        saveHalls("databases/detailHalls.txt");
+        hall.save(); // Save the updated hall
     }
 
     public void deleteHall(int hallId) {
         halls.removeIf(hall -> hall.getId() == hallId);
-        saveHalls("databases/detailHalls.txt");
+        Hall hallToDelete = new Hall(hallId, "", "", 0, 0); // Temporary Hall object for deletion
+        hallToDelete.delete(hallId); // Delete the hall using the IObject method
     }
 
-    public List<Hall> loadHalls(String filename) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+    public void loadHalls() {
+        try (BufferedReader br = new BufferedReader(new FileReader("databases/detailHalls.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                int id = Integer.parseInt(parts[0].trim()); // Hall ID
-                String name = parts[1].trim(); // Hall name
-                double hourlyRate = Double.parseDouble(parts[2].trim()); // Hourly rate
-                int totalSeats = Integer.parseInt(parts[3].trim()); // Total seats
-                halls.add(new Hall(id, name, "Location", hourlyRate, totalSeats));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return halls;
-    }
-
-    private void saveHalls(String filename) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
-            for (Hall hall : halls) {
-                bw.write(hall.getId() + "," + hall.getHallType() + "," + hall.getHourlyRate() + "," + hall.getTotalSeats());
-                bw.newLine();
+                Hall hall = new Hall(0, "", "", 0, 0); // Temporary Hall object
+                hall.LoadFromString(line); // Load from string
+                halls.add(hall);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,5 +50,30 @@ public class HallManager {
 
     public Hall getHallById(int hallId) {
         return halls.stream().filter(hall -> hall.getId() == hallId).findFirst().orElse(null);
+    }
+
+    @Override
+    protected LinkedList<String> getAttributes() {
+        LinkedList<String> attributes = new LinkedList<>();
+        for (Hall hall : halls) {
+            attributes.add(hall.getAttributesAsString());
+        }
+        return attributes;
+    }
+
+    @Override
+    protected String getFilePath() {
+        return "databases/hallManager.txt"; // Path to save/load HallManager data
+    }
+
+    @Override
+    protected void loadFromString(List<String> attributes) {
+        // Logic to load HallManager state from a string (if needed)
+    }
+
+    @Override
+    public void save() {
+        // Save the HallManager state
+        FileManager.writeFile(this.getFilePath(), String.join("\n", getAttributes()));
     }
 }

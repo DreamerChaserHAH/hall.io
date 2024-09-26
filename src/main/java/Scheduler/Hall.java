@@ -1,7 +1,10 @@
 package Scheduler;
 
-public class Hall {
-    private int id;
+import com.lucid.fileio.IObject;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Hall extends IObject {
     private String hallType;
     private String location;
     private double hourlyRate;
@@ -15,7 +18,27 @@ public class Hall {
         this.totalSeats = totalSeats;
     }
 
-    public Hall(int id, String name, String location, Object o, Object o1, double hourlyRate, int totalSeats) {
+    @Override
+    protected LinkedList<String> getAttributes() {
+        LinkedList<String> attributes = new LinkedList<>();
+        attributes.add(hallType);
+        attributes.add(location);
+        attributes.add(String.valueOf(hourlyRate));
+        attributes.add(String.valueOf(totalSeats));
+        return attributes;
+    }
+
+    @Override
+    protected String getFilePath() {
+        return "databases/detailHalls.txt"; // Path to save/load Hall data
+    }
+
+    @Override
+    protected void loadFromString(List<String> attributes) {
+        this.hallType = attributes.get(1);
+        this.location = attributes.get(2);
+        this.hourlyRate = Double.parseDouble(attributes.get(3));
+        this.totalSeats = Integer.parseInt(attributes.get(4));
     }
 
     public int getId() {

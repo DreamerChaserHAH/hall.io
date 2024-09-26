@@ -10,6 +10,12 @@
         <maven.compiler.target>22</maven.compiler.target>
         <exec.mainClass>com.lucid.admin.Lucidhallio</exec.mainClass>
     </properties>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
     <dependencies>
         <!-- JUnit dependency for testing -->
         <dependency>
@@ -23,6 +29,23 @@
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.DreamerChaserHAH</groupId>
+            <artifactId>hall.io</artifactId>
+            <version>b35177740799edc10b81695244bd3b45f59f0aea</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
