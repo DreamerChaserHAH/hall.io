@@ -1,7 +1,5 @@
 package com.hallio.admin;
-
-import com.hallio.admin.User;
-
+import javax.swing.table.DefaultTableModel;
 public class usermgment {
 
     public static void superuserCreate() {
@@ -12,11 +10,7 @@ public class usermgment {
         usermgmentservices.createUser(userLogiName, userPassword, userRole, userFirstName, userLastName, userPhone, userEmail);
     }
 
-    public static void userDelete(String username) {
-        usermgmentservices.deleteUser(username);
-    }
-
-    public static void userEdit(String username, User updatedUser) {
-        usermgmentservices.editUser(username, updatedUser);
+    public static void loadData(String fileName, DefaultTableModel model) {
+        usermgmentservices.loadDataFromFile(fileName, model);
     }
 }
