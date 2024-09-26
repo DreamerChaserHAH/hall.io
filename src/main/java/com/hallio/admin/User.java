@@ -3,7 +3,7 @@ package com.hallio.admin;
 import com.hallio.dms.IObject;
 
 public class User implements IObject {
-    private int id; // Assuming there's an ID field
+    private int id;
     private String username;
     private String password;
     private String role;
@@ -31,14 +31,13 @@ public class User implements IObject {
     }
 
     // Implementing methods from IObject
-    @Override
+
     public int getId() {
         return id;
     }
 
     @Override
     public String getAttributesWithIdAsString() {
-        // Return attributes as a CSV string including the ID
         return id + "," + username + "," + password + "," + role + "," +
                 firstName + "," + lastName + "," + phone + "," + email + "," +
                 regDate + "," + lastLogin;
@@ -46,7 +45,6 @@ public class User implements IObject {
 
     @Override
     public void LoadFromString(String data) {
-        // Parse CSV string to populate fields
         String[] attributes = data.split(",");
         if (attributes.length >= 10) {
             this.id = Integer.parseInt(attributes[0]);
@@ -62,7 +60,20 @@ public class User implements IObject {
         }
     }
 
-    // Getter methods for all attributes
+    // Implementing additional methods from IObject
+    @Override
+    public String[] getAttributes() {
+        return new String[]{
+                username, password, role, firstName, lastName, phone, email, regDate, lastLogin
+        };
+    }
+
+    @Override
+    public String getFilePath() {
+        return "users.txt"; // Adjust the path as needed
+    }
+
+    // Getter methods
     public String getUsername() {
         return username;
     }
@@ -75,5 +86,5 @@ public class User implements IObject {
         return role;
     }
 
-    // (Add getters for other fields as needed)
+    // Add other getters as needed
 }

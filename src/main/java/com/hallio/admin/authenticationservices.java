@@ -1,7 +1,7 @@
 package com.hallio.admin;
 
 import com.hallio.dms.FileManager;
-import com.hallio.dms.IObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
