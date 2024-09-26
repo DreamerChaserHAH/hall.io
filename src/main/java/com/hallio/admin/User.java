@@ -1,13 +1,11 @@
 package com.hallio.admin;
-
 import com.hallio.dms.IObject;
 import java.util.LinkedList;
 import java.util.List;
 
 public class User extends IObject {
-    private int id;
     private String username;
-    private String password;
+    private String password; // Store plain text password
     private String role;
     private String firstName;
     private String lastName;
@@ -20,9 +18,9 @@ public class User extends IObject {
 
     public User(int id, String username, String password, String role, String firstName,
                 String lastName, String phone, String email, String regDate, String lastLogin) {
-        this.id = id;
+        this.id = id; // `id` inherited from IObject
         this.username = username;
-        this.password = password;
+        this.password = password; // Store password directly
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,17 +30,12 @@ public class User extends IObject {
         this.lastLogin = lastLogin;
     }
 
-    // Implementing methods from IObject
-
-    public int getId() {
-        return id;
-    }
 
     @Override
     public LinkedList<String> getAttributes() {
         LinkedList<String> attributes = new LinkedList<>();
         attributes.add(username);
-        attributes.add(password);
+        attributes.add(password); // Use plain text password
         attributes.add(role);
         attributes.add(firstName);
         attributes.add(lastName);
@@ -54,32 +47,30 @@ public class User extends IObject {
     }
 
     @Override
-    public void LoadFromString(String data) {
-        String[] attributes = data.split(",");
-        if (attributes.length >= 10) {
-            this.id = Integer.parseInt(attributes[0]);
-            this.username = attributes[1];
-            this.password = attributes[2];
-            this.role = attributes[3];
-            this.firstName = attributes[4];
-            this.lastName = attributes[5];
-            this.phone = attributes[6];
-            this.email = attributes[7];
-            this.regDate = attributes[8];
-            this.lastLogin = attributes[9];
+    protected void loadFromString(List<String> attributes) {
+        if (attributes.size() >= 10) {
+            try {
+                this.id = Integer.parseInt(attributes.get(0));
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid ID format: " + attributes.get(0));
+            }
+            this.username = attributes.get(1);
+            this.password = attributes.get(2); // Read plain text password
+            this.role = attributes.get(3);
+            this.firstName = attributes.get(4);
+            this.lastName = attributes.get(5);
+            this.phone = attributes.get(6);
+            this.email = attributes.get(7);
+            this.regDate = attributes.get(8);
+            this.lastLogin = attributes.get(9);
         } else {
-            // Handle error or log warning
+            System.err.println("Insufficient attributes to load User object.");
         }
     }
 
     @Override
     public String getFilePath() {
-        return "users.txt"; // Adjust as necessary
-    }
-
-    @Override
-    protected void loadFromString(List<String> list) {
-
+        return "databases/users.txt"; // Adjust the path as necessary
     }
 
     // Getter methods
@@ -88,7 +79,7 @@ public class User extends IObject {
     }
 
     public String getPassword() {
-        return password;
+        return password; // Provide getter for password
     }
 
     public String getRole() {
@@ -96,4 +87,6 @@ public class User extends IObject {
     }
 
     // Add other getters as needed
+
+    // You may add setter methods if necessary
 }
