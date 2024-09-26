@@ -5,7 +5,7 @@ public class startupmanager {
 
     // Check for flag file
     public static boolean checkFreshStart() {
-        return com.hallio.fileio.FileManager.isFileExist("start.flag");
+        return com.hallio.dms.FileManager.isFileExist("start.flag");
     }
 
     // Perform Fresh Start
