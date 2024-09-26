@@ -1,6 +1,7 @@
 package com.hallio;
 import com.hallio.dms.DatabaseManager;
 import com.hallio.dms.FileManager;
+import com.hallio.admin.usermgment;
 public class startupmanager {
 
     // Check for flag file
