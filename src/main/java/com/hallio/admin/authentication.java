@@ -1,6 +1,6 @@
 package com.hallio.admin;
 
-public class Authentication {
+public class authentication {
 
     public static boolean authenticate(String username, String password) {
         return authenticationservices.authenticate(username, password);

@@ -5,7 +5,7 @@ import com.hallio.dms.IObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthenticationServices {
+public class authenticationservices {
 
     public static boolean authenticate(String username, String password) {
         List<User> users = getAllUsers();
