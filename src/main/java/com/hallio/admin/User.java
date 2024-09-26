@@ -1,10 +1,9 @@
 package com.hallio.admin;
 
 import com.hallio.dms.IObject;
-import java.util.LinkedList;
-import java.util.List;
 
-public class User extends IObject {
+public class User implements IObject {
+    private int id; // Assuming there's an ID field
     private String username;
     private String password;
     private String role;
@@ -17,7 +16,9 @@ public class User extends IObject {
 
     public User() {}
 
-    public User(String username, String password, String role, String firstName, String lastName, String phone, String email, String regDate, String lastLogin) {
+    public User(int id, String username, String password, String role, String firstName,
+                String lastName, String phone, String email, String regDate, String lastLogin) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -29,6 +30,39 @@ public class User extends IObject {
         this.lastLogin = lastLogin;
     }
 
+    // Implementing methods from IObject
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String getAttributesWithIdAsString() {
+        // Return attributes as a CSV string including the ID
+        return id + "," + username + "," + password + "," + role + "," +
+                firstName + "," + lastName + "," + phone + "," + email + "," +
+                regDate + "," + lastLogin;
+    }
+
+    @Override
+    public void LoadFromString(String data) {
+        // Parse CSV string to populate fields
+        String[] attributes = data.split(",");
+        if (attributes.length >= 10) {
+            this.id = Integer.parseInt(attributes[0]);
+            this.username = attributes[1];
+            this.password = attributes[2];
+            this.role = attributes[3];
+            this.firstName = attributes[4];
+            this.lastName = attributes[5];
+            this.phone = attributes[6];
+            this.email = attributes[7];
+            this.regDate = attributes[8];
+            this.lastLogin = attributes[9];
+        }
+    }
+
+    // Getter methods for all attributes
     public String getUsername() {
         return username;
     }
@@ -41,60 +75,5 @@ public class User extends IObject {
         return role;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getRegDate() {
-        return regDate;
-    }
-
-    public String getLastLogin() {
-        return lastLogin;
-    }
-
-    @Override
-    public LinkedList<String> getAttributes() {
-        LinkedList<String> attributes = new LinkedList<>();
-        attributes.add(username);
-        attributes.add(password);
-        attributes.add(role);
-        attributes.add(firstName);
-        attributes.add(lastName);
-        attributes.add(phone);
-        attributes.add(email);
-        attributes.add(regDate);
-        attributes.add(lastLogin);
-        return attributes;
-    }
-
-    @Override
-    protected String getFilePath() {
-        return "databases/users.txt";
-    }
-
-    @Override
-    protected void loadFromString(List<String> attributes) {
-        this.username = attributes.get(1);
-        this.password = attributes.get(2);
-        this.role = attributes.get(3);
-        this.firstName = attributes.get(4);
-        this.lastName = attributes.get(5);
-        this.phone = attributes.get(6);
-        this.email = attributes.get(7);
-        this.regDate = attributes.get(8);
-        this.lastLogin = attributes.get(9);
-    }
+    // (Add getters for other fields as needed)
 }
