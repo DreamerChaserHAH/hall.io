@@ -1,1 +1,0 @@
-1,customer1,customer2,customer,customer,customer,+601123244,asd@mail.com,2024-09-27,2024-09-27
