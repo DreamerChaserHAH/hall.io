@@ -1,11 +1,13 @@
 package com.hallio.admin;
 
+import com.hallio.dms.DatabaseManager;
 import com.hallio.dms.FileManager;
 import com.hallio.dms.IObject;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -106,6 +108,10 @@ public class usermgmentservices {
             this.regDate = attributes.get(8);
             this.lastLogin = attributes.get(9);
         }
+
+        public String getAttributesWithIdAsString() {
+            return String.join(",", getAttributes());
+        }
     }
 
     public static void loadDataFromFile(String fileName, DefaultTableModel model) {
@@ -134,7 +140,20 @@ public class usermgmentservices {
         createUser("admin", "admin", "superuser", "na", "na", "na", "na");
     }
 
-
-
+    public static class UserData {
+        public static List<String[]> readUsersFromFile(String filePath) {
+            List<String[]> users = new ArrayList<>();
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    // Assuming each line is comma-separated
+                    String[] userData = line.split(",");
+                    users.add(userData);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return users;
+        }
+    }
 }
-

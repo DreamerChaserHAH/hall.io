@@ -122,4 +122,5 @@ public class User {
         // Implementation to return user attributes as a string
         return id + "," + username + "," + password + "," + role + "," + firstName + "," + lastName + "," + phone + "," + email + "," + regDate + "," + lastLogin;
     }
+
 }
