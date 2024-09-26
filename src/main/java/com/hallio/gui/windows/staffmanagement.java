@@ -4,6 +4,10 @@ import com.hallio.gui.windows.registerform;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class staffmanagement extends javax.swing.JFrame {
@@ -15,6 +19,23 @@ public class staffmanagement extends javax.swing.JFrame {
     public staffmanagement() {
         initComponents();
         populateTable();
+    }
+
+    public static class UserData {
+        public static List<String[]> readUsersFromFile(String filePath) {
+            List<String[]> users = new ArrayList<>();
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    // Assuming each line is comma-separated
+                    String[] userData = line.split(",");
+                    users.add(userData);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return users;
+        }
     }
 
     private void initComponents() {
