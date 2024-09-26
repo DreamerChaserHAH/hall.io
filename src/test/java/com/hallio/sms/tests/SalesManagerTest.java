@@ -2,7 +2,8 @@ package com.hallio.sms.tests;
 
 import com.hallio.dms.DatabaseManager;
 import com.hallio.dms.FileManager;
-
+import com.hallio.admin.usermgment;
+import com.hallio.admin.User;
 import com.hallio.sms.Sales;
 import com.hallio.sms.SalesManager;
 import com.hallio.sms.SalesStatus;
@@ -20,6 +21,7 @@ public class SalesManagerTest {
         // Create a new database for sales
         FileManager.deleteEnvironment();
         FileManager.createEnvironment();
+        DatabaseManager.createDatabase("users");
         DatabaseManager.createDatabase("sales");
         DatabaseManager.createDatabase("relatedSalesBooking");
     }
@@ -27,6 +29,7 @@ public class SalesManagerTest {
     @AfterEach
     public void reset(){
         // Delete the database for sales
+        DatabaseManager.deleteDatabase("users");
         DatabaseManager.deleteDatabase("sales");
         DatabaseManager.deleteDatabase("relatedSalesBooking");
         FileManager.deleteEnvironment();
@@ -35,6 +38,7 @@ public class SalesManagerTest {
     @Test
     public void testAddSales() throws Exception {
         // Add sales with related booking to the database
+        usermgment.userCreate("customer1", "customer2", "customer", "customer", "customer", "+601123244", "apspace@apmail.com");
         RelatedSalesBooking relatedSalesBooking = new RelatedSalesBooking(1, new int[]{1});
         Sales sales = new Sales(1, 1, relatedSalesBooking, SalesStatus.INPROGRESS, 1);
         SalesManager.addSales(sales);
@@ -55,6 +59,7 @@ public class SalesManagerTest {
     @Test
     public void testRemoveSales() throws Exception {
         // Add sales with related booking to the database
+        usermgment.userCreate("customer1", "customer2", "customer", "customer", "customer", "+601123244", "apspace@apmail.com");
         RelatedSalesBooking relatedSalesBooking = new RelatedSalesBooking(1, new int[]{1});
         Sales sales = new Sales(1, 1, relatedSalesBooking, SalesStatus.INPROGRESS, 1);
         SalesManager.addSales(sales);
@@ -70,6 +75,8 @@ public class SalesManagerTest {
     @Test
     public void testUpdateSales() throws Exception {
         // Add sales with related booking to the database
+        usermgment.userCreate("customer1", "customer2", "customer", "customer", "customer", "+601123244", "apspace@apmail.com");
+        usermgment.userCreate("customer2", "customer2", "customer", "customer", "customer", "+601123244", "apspace@apmail.com");
         RelatedSalesBooking relatedSalesBooking = new RelatedSalesBooking(1, new int[]{1});
         Sales sales = new Sales(1, 1, relatedSalesBooking, SalesStatus.INPROGRESS, 1);
         SalesManager.addSales(sales);
@@ -89,6 +96,7 @@ public class SalesManagerTest {
     @Test
     public void testGetSales() throws Exception {
         // Add sales with related booking to the database
+        usermgment.userCreate("customer1", "customer2", "customer", "customer", "customer", "+601123244", "apspace@apmail.com");
         RelatedSalesBooking relatedSalesBooking = new RelatedSalesBooking(1, new int[]{1});
         Sales sales = new Sales(1, 1, relatedSalesBooking, SalesStatus.INPROGRESS, 1);
         SalesManager.addSales(sales);
