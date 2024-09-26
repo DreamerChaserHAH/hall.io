@@ -7,7 +7,7 @@ import java.awt.event.FocusListener;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import com.lucid.admin.usermgment;
+import com.hallio.admin.usermgment;
 
 /**
  *
@@ -189,9 +189,15 @@ public class registerform extends javax.swing.JFrame {
 
     private void userSignupbtnActionPerformed(java.awt.event.ActionEvent evt) {
         // Collect input data
+
+        // forfce the dropfdown to be lowercase
+
+
+
         String userLogiName = userLoginName.getText();
         String userPassword = new String(userpassword.getPassword());
-        String userRole = (String) userRoleDropdown.getSelectedItem();
+        String userRole = userRoleDropdown.getSelectedItem().toString().toLowerCase();
+        userRoleDropdown.setSelectedItem(userRole);
         String userfirstname = userFirstname.getText();
         String userlastname =  userLastName.getText();
         String userPhone = userContactNum.getText();
