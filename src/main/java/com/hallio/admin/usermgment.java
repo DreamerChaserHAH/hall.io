@@ -1,5 +1,7 @@
 package com.hallio.admin;
 
+import com.hallio.admin.User;
+
 public class usermgment {
 
     public static void superuserCreate() {
@@ -14,7 +16,7 @@ public class usermgment {
         usermgmentservices.deleteUser(username);
     }
 
-    public static void userEdit(String username, usermgmentservices.User updatedUser) {
+    public static void userEdit(String username, User updatedUser) {
         usermgmentservices.editUser(username, updatedUser);
     }
 }

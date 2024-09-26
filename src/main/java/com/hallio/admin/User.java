@@ -1,11 +1,11 @@
 package com.hallio.admin;
-import com.hallio.dms.IObject;
-import java.util.LinkedList;
+
 import java.util.List;
 
-public class User extends IObject {
+public class User {
+    private int id;
     private String username;
-    private String password; // Store plain text password
+    private String password;
     private String role;
     private String firstName;
     private String lastName;
@@ -14,13 +14,11 @@ public class User extends IObject {
     private String regDate;
     private String lastLogin;
 
-    public User() {}
-
-    public User(int id, String username, String password, String role, String firstName,
-                String lastName, String phone, String email, String regDate, String lastLogin) {
-        this.id = id; // `id` inherited from IObject
+    // Constructor
+    public User(int id, String username, String password, String role, String firstName, String lastName, String phone, String email, String regDate, String lastLogin) {
+        this.id = id;
         this.username = username;
-        this.password = password; // Store password directly
+        this.password = password;
         this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,63 +28,98 @@ public class User extends IObject {
         this.lastLogin = lastLogin;
     }
 
+    // Default constructor
+    public User() {}
 
-    @Override
-    public LinkedList<String> getAttributes() {
-        LinkedList<String> attributes = new LinkedList<>();
-        attributes.add(username);
-        attributes.add(password); // Use plain text password
-        attributes.add(role);
-        attributes.add(firstName);
-        attributes.add(lastName);
-        attributes.add(phone);
-        attributes.add(email);
-        attributes.add(regDate);
-        attributes.add(lastLogin);
-        return attributes;
+    // Getters and setters
+    public int getId() {
+        return id;
     }
 
-    @Override
-    protected void loadFromString(List<String> attributes) {
-        if (attributes.size() >= 10) {
-            try {
-                this.id = Integer.parseInt(attributes.get(0));
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid ID format: " + attributes.get(0));
-            }
-            this.username = attributes.get(1);
-            this.password = attributes.get(2); // Read plain text password
-            this.role = attributes.get(3);
-            this.firstName = attributes.get(4);
-            this.lastName = attributes.get(5);
-            this.phone = attributes.get(6);
-            this.email = attributes.get(7);
-            this.regDate = attributes.get(8);
-            this.lastLogin = attributes.get(9);
-        } else {
-            System.err.println("Insufficient attributes to load User object.");
-        }
+    public void setId(int id) {
+        this.id = id;
     }
 
-    @Override
-    public String getFilePath() {
-        return "databases/users.txt"; // Adjust the path as necessary
-    }
-
-    // Getter methods
     public String getUsername() {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
-        return password; // Provide getter for password
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {
         return role;
     }
 
-    // Add other getters as needed
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-    // You may add setter methods if necessary
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate) {
+        this.regDate = regDate;
+    }
+
+    public String getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    // Method to load user data from a list of strings
+    public void loadFromString(List<String> attributes) {
+        // Implementation to load user data from attributes
+    }
+
+    // Method to get user attributes as a string
+    public String getAttributesWithIdAsString() {
+        // Implementation to return user attributes as a string
+        return id + "," + username + "," + password + "," + role + "," + firstName + "," + lastName + "," + phone + "," + email + "," + regDate + "," + lastLogin;
+    }
 }
