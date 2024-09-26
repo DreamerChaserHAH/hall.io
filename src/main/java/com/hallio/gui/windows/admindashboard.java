@@ -133,11 +133,12 @@ public class admindashboard extends javax.swing.JFrame {
     }
 
     private void myprofilebtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        //
     }
 
     private void usermanagementbtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        usermanagement.main(null);
+        this.dispose();
     }
 
     /**

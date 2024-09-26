@@ -38,6 +38,18 @@ public class schedulermanagement extends JFrame {
             }
             return users;
         }
+
+        // New method to get users by role
+        public static List<String[]> getUsersByRole(String filePath, String role) {
+            List<String[]> usersByRole = new ArrayList<>();
+            List<String[]> allUsers = readUsersFromFile(filePath);
+            for (String[] user : allUsers) {
+                if (user.length > 3 && user[3].equalsIgnoreCase(role)) {
+                    usersByRole.add(user);
+                }
+            }
+            return usersByRole;
+        }
     }
 
     private void initComponents() {
@@ -116,20 +128,18 @@ public class schedulermanagement extends JFrame {
     }
 
     private void populateTable(String usernameFilter) {
-        List<String[]> users = UserData.readUsersFromFile("databases\\users.txt");
+        List<String[]> users = UserData.getUsersByRole("databases\\users.txt", "scheduler");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0); // Clear existing data
         for (String[] user : users) {
-            if (user.length > 3 && user[3].equalsIgnoreCase("scheduler")) {
-                String username = user[1];
-                if (username.toLowerCase().contains(usernameFilter.toLowerCase())) {
-                    // Add placeholders for "Edit" and "Delete" buttons
-                    Object[] rowData = new Object[user.length + 2]; // +2 for Edit and Delete buttons
-                    System.arraycopy(user, 0, rowData, 0, user.length);
-                    rowData[rowData.length - 2] = "Edit";
-                    rowData[rowData.length - 1] = "Delete";
-                    model.addRow(rowData);
-                }
+            String username = user[1];
+            if (username.toLowerCase().contains(usernameFilter.toLowerCase())) {
+                // Add placeholders for "Edit" and "Delete" buttons
+                Object[] rowData = new Object[user.length + 2]; // +2 for Edit and Delete buttons
+                System.arraycopy(user, 0, rowData, 0, user.length);
+                rowData[rowData.length - 2] = "Edit";
+                rowData[rowData.length - 1] = "Delete";
+                model.addRow(rowData);
             }
         }
     }
