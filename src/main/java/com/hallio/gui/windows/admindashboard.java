@@ -124,7 +124,8 @@ public class admindashboard extends javax.swing.JFrame {
     }
 
     private void staffmanagementbtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        staffmanagement.main(null);
+        this.dispose();
     }
 
     private void viewcustomerbookingbtnActionPerformed(java.awt.event.ActionEvent evt) {
