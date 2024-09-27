@@ -133,7 +133,7 @@ public class admindashboard extends javax.swing.JFrame {
     }
 
     private void myprofilebtnActionPerformed(java.awt.event.ActionEvent evt) {
-        //
+        MyAdminProfile myAdminProfile = new MyAdminProfile(this, "admin");
     }
 
     private void usermanagementbtnActionPerformed(java.awt.event.ActionEvent evt) {
