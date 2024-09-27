@@ -1,7 +1,11 @@
 package com.hallio.gui;
 
+import com.hallio.dms.DatabaseManager;
 import com.hallio.hms.Hall;
 import com.hallio.hms.HallManager;
+import com.hallio.hms.schedule.Schedule;
+import com.hallio.hms.schedule.ScheduleManager;
+import com.hallio.hms.schedule.ScheduleType;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -10,9 +14,12 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HallManagementGUI extends JFrame {
     private SchedulerDashboard dashboard; // Reference to the Dashboard
@@ -142,7 +149,7 @@ public class HallManagementGUI extends JFrame {
         addLabelAndField(scheduleDetailsPanel, "Date:", dateField);
 
         // Type ComboBox
-        typeComboBox = new JComboBox<>(new String[]{"BOOKING", "AVAILABILITY", "MAINTENANCE"});
+        typeComboBox = new JComboBox<>(new String[]{ "AVAILABLE", "MAINTENANCE"});
         addLabelAndField(scheduleDetailsPanel, "Type:", typeComboBox);
 
         // Start Time Spinner
@@ -169,7 +176,14 @@ public class HallManagementGUI extends JFrame {
 
         // Schedule Table
         String[] columnNames = {"Title", "Hall ID", "Start Time", "End Time", "Type"};
+
+        Schedule[] schedules = ScheduleManager.loadSchedules();
+
         scheduleTableModel = new DefaultTableModel(columnNames, 0);
+        for (Schedule schedule : schedules) {
+            scheduleTableModel.addRow(new Object[]{"UNKNOWN", schedule.getHallId(), schedule.getStartTime(), schedule.getEndTime(), schedule.getScheduleType()});
+        }
+
         scheduleTable = new JTable(scheduleTableModel);
         JScrollPane tableScrollPane = new JScrollPane(scheduleTable);
         tableScrollPane.setBorder(BorderFactory.createTitledBorder("Scheduled Events"));
@@ -251,11 +265,12 @@ public class HallManagementGUI extends JFrame {
 
         try {
             // Parse start and end times
-            LocalDateTime startTime = LocalDateTime.parse(startTimeString, DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm"));
-            LocalDateTime endTime = LocalDateTime.parse(endTimeString, DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm"));
+            LocalDateTime startTime = LocalDateTime.parse(startTimeString, DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm", Locale.ENGLISH));
+            LocalDateTime endTime = LocalDateTime.parse(endTimeString, DateTimeFormatter.ofPattern("MMM d, yyyy HH:mm", Locale.ENGLISH));
 
             // Add schedule to the table
             scheduleTableModel.addRow(new Object[]{title, hallId, startTime, endTime, type});
+            ScheduleManager.addSchedule(new Schedule(DatabaseManager.getNext("schedule"), hallId, 0, new Date(startTime.toEpochSecond(ZoneOffset.UTC)), new Date(endTime.toEpochSecond(ZoneOffset.UTC)), ScheduleType.valueOf(type)));
             saveSchedulesToFile(); // Save schedules after creating
         } catch (DateTimeParseException e) {
             JOptionPane.showMessageDialog(null, "Please enter a valid date and time format.");
@@ -300,7 +315,7 @@ public class HallManagementGUI extends JFrame {
         JTextField hallIdField = new JTextField(String.valueOf(currentHallId));
         JTextField startTimeField = new JTextField(currentStartTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         JTextField endTimeField = new JTextField(currentEndTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        JComboBox<String> typeComboBox = new JComboBox<>(new String[]{"BOOKING", "AVAILABILITY", "MAINTENANCE"});
+        JComboBox<String> typeComboBox = new JComboBox<>(new String[]{"AVAILABLE", "MAINTENANCE"});
         typeComboBox.setSelectedItem(currentType);
 
         // Show dialog for editing

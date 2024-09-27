@@ -47,7 +47,17 @@ public class HallManager {
     }
 
     public static boolean hallExists(int hallId) {
-        return hallsStored.stream().anyMatch(hall -> hall.getId() == hallId);
+        Hall[] halls = new Hall[DatabaseManager.getAmountOfRecords(databaseName)];
+        for (int i = 0; i < halls.length; i++) {
+            halls[i] = new Hall();
+        }
+        DatabaseManager.readAllRecords(databaseName, halls);
+        for (Hall hall : halls) {
+            if (hall.getId() == hallId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static Hall getHallById(int hallId) {

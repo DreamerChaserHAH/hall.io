@@ -44,6 +44,7 @@ public class Hall extends IObject {
 
     @Override
     protected void loadFromString(List<String> attributes) {
+        this.id = Integer.parseInt(attributes.get(0));
         this.hallType = attributes.get(1);
         this.location = attributes.get(2);
         this.hourlyRate = Double.parseDouble(attributes.get(3));

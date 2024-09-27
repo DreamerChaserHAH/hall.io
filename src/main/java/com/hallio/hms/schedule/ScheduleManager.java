@@ -19,6 +19,16 @@ public class ScheduleManager {
         }
     }
 
+    public static Schedule[] loadSchedules() {
+        // Load all schedules from the database
+        Schedule[] schedules = new Schedule[DatabaseManager.getAmountOfRecords(databaseName)];
+        for (int i = 0; i < schedules.length; i++) {
+            schedules[i] = new Schedule();
+        }
+        DatabaseManager.readAllRecords(databaseName, schedules);
+        return schedules;
+    }
+
     public static void removeSchedule(Schedule schedule) {
         // Remove the schedule from the database
         try{
