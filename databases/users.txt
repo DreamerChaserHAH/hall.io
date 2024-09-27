@@ -1,5 +1,0 @@
-admin,admin,superuser,na,na,2024-09-14,2024-09-14
-admin1username,Admin1@pass,admin,admin1firstname,admin1lastname,0123456789,admin1@gmail.com,2024-09-22,2024-09-22,0
-scheduler1username,Scheduler1@pass,Scheduler,scheduler1firstname,scheduler1lastname,0123456789,scheduler1@gmail.com,2024-09-22,2024-09-22,0
-manager1username,Manager1@pass,Manager,manager1firstname,manager1lastname,0123456789,manager1@gmail.com,2024-09-22,2024-09-22,0
-customer1username,Customer1@pass,Customer,customer1firstname,customer1lastname,0123456789,customer1@gmail.com,2024-09-22,2024-09-22,0

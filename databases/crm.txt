@@ -1,7 +1,0 @@
-1,MeetingHall A,2024-09-02,14:00
-2,Conference , 2024-09-03,10:00
-3,ConferenceRoom C,2024-09-04,12:00
-4,WeddingHall, 2024-09-02,14:00
-5,BanquetHall, 2024-09-03, 10:00
-6,AuditoriumHall, 2024-09-04,12:00
-

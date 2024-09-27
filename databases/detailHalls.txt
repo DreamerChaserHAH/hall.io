@@ -1,2 +1,1 @@
-1,Wedding Hall,1000.0,200
-2,Meeting Hall,500.0,16
+1,Htet Aung,Location,3000.0,50
