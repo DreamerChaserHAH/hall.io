@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.hallio.admin.AuthenticationServices;
+import com.hallio.gui.SchedulerDashboard;
+import com.hallio.gui.dashboard.CustomerDashboard;
+import com.hallio.gui.dashboard.ManagerDashboard;
 
 public class loginGUI {
 
@@ -48,14 +51,14 @@ public class loginGUI {
                             case "superuser":
                                 superadmin.main(args);
                                 break;
-                            case "Manager":
-
+                            case "manager":
+                                ManagerDashboard.main(args);
                                 break;
-                            case "Scheduler":
-
+                            case "scheduler":
+                                SchedulerDashboard.main(args);
                                 break;
                             case "customer":
-
+                                CustomerDashboard.main(args);
                                 break;
                             case "admin":
                                 admindashboard.main(args);
