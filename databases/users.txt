@@ -3,3 +3,4 @@
 3,scheduler1username,Sch@1Password,scheduler,scheduler1first,scheduler1last,0123456879,scheduler1@gmail.com,2024-09-27,2024-09-27
 4,scheduler2username,Sch2@Password,scheduler,scheduler2first,scheduler2last,0123456879,scheduler2@gmail.com,2024-09-27,2024-09-27
 5, manager1username,Mgr1@Password,manager,manager1first,manager1last,0213456789,manager1@gmail.com,2024-09-27,2024-09-27
+6,customercustomer,admin,customer,N/A,N/A,N/A,N/A,2024-09-27,2024-09-27,No

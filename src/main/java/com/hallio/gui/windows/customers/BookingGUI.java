@@ -2,22 +2,73 @@ package com.hallio.gui.windows.customers;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+
+import com.hallio.bms.Booking;
+import com.hallio.bms.BookingManager;
+import com.hallio.dms.DatabaseManager;
+import com.hallio.hms.Hall;
+import com.hallio.hms.HallManager;
+import com.hallio.hms.schedule.Schedule;
+import com.hallio.hms.schedule.ScheduleManager;
+import com.hallio.sms.*;
 
 public class BookingGUI {
 
-    private static String[] halls = {"Hall A", "Hall B", "Hall C", "Hall D"};
+    private static String[] hallNames = {"Hall A", "Hall B", "Hall C", "Hall D"};
     private static HashMap<String, String[]> hallTimes = new HashMap<>();
     
     private static String selectedHall = "";
     private static String selectedTime = "";
     
     public static void main(String[] args) {
+
+        //get the halls from HallManager.loadHalls() and convert it into and Array
+        Hall[] halls = new Hall[DatabaseManager.getNext("detailHalls")];
+        for(int i = 0; i < halls.length; i++){
+            halls[i] = new Hall();
+        }
+        DatabaseManager.readAllRecords("detailHalls", halls);
+
+        HashMap<String, Hall> hallMap = new HashMap<>();
+        hallNames = new String[halls.length];
+        for(int i = 0; i < halls.length; i++){
+            hallNames[i] = "Hall" + halls[i].id;
+            hallMap.put(hallNames[i], halls[i]);
+        }
+
+        Schedule[] schedules = new Schedule[DatabaseManager.getNext("schedule")];
+        for(int i = 0; i < schedules.length; i++){
+            schedules[i] = new Schedule();
+        }
+        DatabaseManager.readAllRecords("schedule", schedules);
+
+        // Group Schedule by Hall ID
+        HashMap<Integer, ArrayList<Schedule>> hallSchedules = new HashMap<>();
+        for(Schedule schedule : schedules){
+            if(hallSchedules.containsKey(schedule.getHallId())){
+                hallSchedules.get(schedule.getHallId()).add(schedule);
+            } else {
+                ArrayList<Schedule> newSchedule = new ArrayList<>();
+                newSchedule.add(schedule);
+                hallSchedules.put(schedule.getHallId(), newSchedule);
+            }
+        }
+
         // Set available times for each hall
-        hallTimes.put("Hall A", new String[]{"10:00 AM - 12:00 PM", "1:00 PM - 3:00 PM", "4:00 PM - 6:00 PM"});
-        hallTimes.put("Hall B", new String[]{"9:00 AM - 11:00 AM", "12:00 PM - 2:00 PM", "3:00 PM - 5:00 PM"});
-        hallTimes.put("Hall C", new String[]{"11:00 AM - 1:00 PM", "2:00 PM - 4:00 PM", "5:00 PM - 7:00 PM"});
-        hallTimes.put("Hall D", new String[]{"8:00 AM - 10:00 AM", "10:30 AM - 12:30 PM", "1:00 PM - 3:00 PM"});
+        for(int i = 0; i < hallNames.length; i++){
+            ArrayList<Schedule> hallSchedule = hallSchedules.get(i);
+            if(hallSchedule != null) {
+                String[] times = new String[hallSchedule.size()];
+                for (int j = 0; j < hallSchedule.size(); j++) {
+                    times[j] = hallSchedule.get(j).getStartTime() + " - " + hallSchedule.get(j).getEndTime();
+                }
+                hallTimes.put(hallNames[i], times);
+            }
+        }
 
         // Create the main frame
         JFrame frame = new JFrame("Hall Booking");
@@ -33,14 +84,14 @@ public class BookingGUI {
         
         // Hall selection label and combo box
         JLabel selectHallLabel = new JLabel("Select a Hall:");
-        JComboBox<String> hallComboBox = new JComboBox<>(halls);
+        JComboBox<String> hallComboBox = new JComboBox<>(hallNames);
         
         // Time selection label and combo box
         JLabel selectTimeLabel = new JLabel("Available Times:");
         JComboBox<String> timeComboBox = new JComboBox<>();
         
         // Set initial available times for Hall A
-        updateAvailableTimes(timeComboBox, "Hall A");
+        updateAvailableTimes(timeComboBox, hallNames[0]);
 
         // Update available times when a hall is selected
         hallComboBox.addActionListener(e -> {
@@ -54,7 +105,11 @@ public class BookingGUI {
         // Add action listener to the proceed button
         proceedButton.addActionListener(e -> {
             selectedTime = (String) timeComboBox.getSelectedItem(); // Get selected time
-            openPaymentWindow(frame); // Proceed to payment window
+            openPaymentWindow(
+                    frame,
+                    hallMap.get(selectedHall),
+                    hallSchedules.get(hallMap.get(selectedHall).id).get(timeComboBox.getSelectedIndex())
+            ); // Proceed to payment window
         });
 
         // Layout the components
@@ -86,13 +141,15 @@ public class BookingGUI {
     // Function to update the available times based on the selected hall
     private static void updateAvailableTimes(JComboBox<String> timeComboBox, String hall) {
         timeComboBox.removeAllItems(); // Clear previous items
-        for (String time : hallTimes.get(hall)) {
-            timeComboBox.addItem(time); // Add new available times for selected hall
+        if(hallTimes.get(hall) != null) {
+            for (String time : hallTimes.get(hall)) {
+                timeComboBox.addItem(time); // Add new available times for selected hall
+            }
         }
     }
 
     // Function to open the payment window
-    private static void openPaymentWindow(JFrame parentFrame) {
+    private static void openPaymentWindow(JFrame parentFrame, Hall hall, Schedule schedule) {
         // Create a new frame for payment
         JFrame paymentFrame = new JFrame("Payment");
         paymentFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -112,7 +169,39 @@ public class BookingGUI {
         payButton.addActionListener(e -> {
             String cardHolderName = cardNameField.getText();
             paymentFrame.dispose(); // Close payment window
-            ReceiptGUI.displayReceipt(selectedHall, selectedTime);  // Open receipt window
+
+            int SalesID = DatabaseManager.getNext("sales");
+
+            Booking newBooking = new Booking(DatabaseManager.getNext("booking"), hall.id, SalesID);
+            BookingManager.createBooking(hall.id, SalesID);
+
+            //create an int array with one element
+            int[] newBookingIDList = new int[1];
+            newBookingIDList[0] = newBooking.id;
+            RelatedSalesBooking newRelatedSalesBooking = new RelatedSalesBooking(SalesID, newBookingIDList);
+            try {
+                RelatedSalesBookingManager.addRelatedSalesBooking(newRelatedSalesBooking);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+
+            double Price = 100;
+            try {
+                SalesManager.addSales(
+                        new Sales(
+                                SalesID,
+                                6,
+                                newRelatedSalesBooking,
+                                SalesStatus.PAID,
+                                (int) Price,
+                                new Date()
+                        )
+                ); // Add sales record
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+
+            ReceiptGUI.displayReceipt(selectedHall, selectedTime, (int) Price);  // Open receipt window
         });
 
         // Layout components in the payment frame

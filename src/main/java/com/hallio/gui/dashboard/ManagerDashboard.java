@@ -4,7 +4,10 @@
  */
 package com.hallio.gui.dashboard;
 
+import com.hallio.gui.AdminAssignSchedulerGUI;
+import com.hallio.gui.AdminChangeStatusGUI;
 import com.hallio.gui.SalesGUI;
+import com.hallio.gui.TicketResponder;
 
 /**
  *
@@ -28,17 +31,19 @@ public class ManagerDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        SalesDashboardButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        AASButton = new javax.swing.JButton();
+        LogoutButton = new javax.swing.JButton();
+        ACSButton = new javax.swing.JButton();
+        TRButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Sales Dashboard");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        SalesDashboardButton.setText("Sales Dashboard");
+        SalesDashboardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                SalesDashboardButtonActionPerformed(evt);
             }
         });
 
@@ -46,17 +51,31 @@ public class ManagerDashboard extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manager Dashboard");
 
-        jButton2.setText("CRM");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        AASButton.setText("Admin Assign Scheduler");
+        AASButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                AASButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Logout");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        LogoutButton.setText("Logout");
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                LogoutButtonActionPerformed(evt);
+            }
+        });
+
+        ACSButton.setText("Admin Change Status");
+        ACSButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ACSButtonActionPerformed(evt);
+            }
+        });
+
+        TRButton.setText("Ticket Responder");
+        TRButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TRButtonActionPerformed(evt);
             }
         });
 
@@ -67,10 +86,12 @@ public class ManagerDashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AASButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(SalesDashboardButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(LogoutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ACSButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TRButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -79,29 +100,45 @@ public class ManagerDashboard extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
                 .addGap(24, 24, 24)
-                .addComponent(jButton1)
+                .addComponent(SalesDashboardButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(AASButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(ACSButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TRButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(LogoutButton)
+                .addGap(49, 49, 49))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void SalesDashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesDashboardButtonActionPerformed
         // TODO add your handling code here:
         SalesGUI salesGUI = new SalesGUI();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_SalesDashboardButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void AASButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AASButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        AdminAssignSchedulerGUI AasGUI = new AdminAssignSchedulerGUI();
+    }//GEN-LAST:event_AASButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+
+    }//GEN-LAST:event_LogoutButtonActionPerformed
+
+    private void ACSButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACSButtonActionPerformed
+        // TODO add your handling code here:
+        AdminChangeStatusGUI AcsGUI = new AdminChangeStatusGUI();
+    }//GEN-LAST:event_ACSButtonActionPerformed
+
+    private void TRButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TRButtonActionPerformed
+        // TODO add your handling code here:
+        TicketResponder TrGUI = new TicketResponder();
+    }//GEN-LAST:event_TRButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,9 +176,11 @@ public class ManagerDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton AASButton;
+    private javax.swing.JButton ACSButton;
+    private javax.swing.JButton LogoutButton;
+    private javax.swing.JButton SalesDashboardButton;
+    private javax.swing.JButton TRButton;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

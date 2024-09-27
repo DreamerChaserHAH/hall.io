@@ -7,7 +7,7 @@ import javax.swing.JTextArea;
 
 
 public class ReceiptGUI {
-    public static void displayReceipt(String cardHolderName, String hallName) {
+    public static void displayReceipt(String cardHolderName, String hallName, int Price) {
         // Create a new frame for receipt
         JFrame receiptFrame = new JFrame("Receipt");
         receiptFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -20,7 +20,7 @@ public class ReceiptGUI {
                 + "-----------------------\n"
                 + "Cardholder: " + cardHolderName + "\n"
                 + "Hall Booked: " + hallName + "\n"
-                + "Amount: RM 1000\n"
+                + "Amount: RM " + Price + "\n"
                 + "-----------------------\n"
                 + "Thank you for your payment!");
 

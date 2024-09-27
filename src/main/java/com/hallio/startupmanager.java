@@ -13,7 +13,7 @@ public class startupmanager {
     public static void performFreshStart(String[] args) {
         String[] fileNames = {
                 "users.txt", "detailHalls.txt", "sales.txt",
-                "booking.txt", "staffs.txt", "crm.txt", "crmsg.txt"
+                "booking.txt", "staffs.txt", "crm.txt", "crmsg.txt", "schedule.txt", "conversations.txt"
         };
         try {
             if (args.length == 0) {
