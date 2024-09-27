@@ -27,7 +27,7 @@ public class BookingGUI {
     public static void main(String[] args) {
 
         //get the halls from HallManager.loadHalls() and convert it into and Array
-        Hall[] halls = new Hall[DatabaseManager.getNext("detailHalls")];
+        Hall[] halls = new Hall[DatabaseManager.getAmountOfRecords("detailHalls")];
         for(int i = 0; i < halls.length; i++){
             halls[i] = new Hall();
         }
@@ -36,11 +36,11 @@ public class BookingGUI {
         HashMap<String, Hall> hallMap = new HashMap<>();
         hallNames = new String[halls.length];
         for(int i = 0; i < halls.length; i++){
-            hallNames[i] = "Hall" + halls[i].id;
+            hallNames[i] = "Hall" + halls[i].getId();
             hallMap.put(hallNames[i], halls[i]);
         }
 
-        Schedule[] schedules = new Schedule[DatabaseManager.getNext("schedule")];
+        Schedule[] schedules = new Schedule[DatabaseManager.getAmountOfRecords("schedule")];
         for(int i = 0; i < schedules.length; i++){
             schedules[i] = new Schedule();
         }
@@ -60,11 +60,11 @@ public class BookingGUI {
 
         // Set available times for each hall
         for(int i = 0; i < hallNames.length; i++){
-            ArrayList<Schedule> hallSchedule = hallSchedules.get(i);
+            ArrayList<Schedule> hallSchedule = hallSchedules.get(halls[i].id);
             if(hallSchedule != null) {
                 String[] times = new String[hallSchedule.size()];
                 for (int j = 0; j < hallSchedule.size(); j++) {
-                    times[j] = hallSchedule.get(j).getStartTime() + " - " + hallSchedule.get(j).getEndTime();
+                    times[j] = hallSchedule.get(j).getStartTime().toString() + " - " + hallSchedule.get(j).getEndTime();
                 }
                 hallTimes.put(hallNames[i], times);
             }
