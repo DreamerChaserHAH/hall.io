@@ -24,9 +24,25 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.DreamerChaserHAH</groupId>
-            <artifactId>hall.io</artifactId>
-            <version>data-management-system-SNAPSHOT</version>
+            <groupId>com.hallio</groupId>
+            <artifactId>data-management-system</artifactId>
+            <version>1.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/data-management-system-1.1-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.hallio</groupId>
+            <artifactId>user-management-system</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/user-management-system-1.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>com.hallio</groupId>
+            <artifactId>booking-management-system</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/booking-management-system-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -45,6 +61,17 @@
             <artifactId>testng</artifactId>
             <version>RELEASE</version>
             <scope>test</scope>
+        </dependency>
+        <!-- JavaFX dependencies -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>11</version>
         </dependency>
     </dependencies>
 
